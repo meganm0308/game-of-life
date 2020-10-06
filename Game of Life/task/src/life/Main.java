@@ -55,7 +55,7 @@ public class Main {
 
             System.out.print("\033[H\033[2J");
             System.out.flush();
-            Thread.sleep(100);
+            Thread.sleep(1000);
         }
     }
 }
