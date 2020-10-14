@@ -67,6 +67,7 @@ public class GameOfLife extends JFrame {
             state = states.getCurrentState();
         }
     }
+
 //    private void textComponents(int generation, int aliveCount) {
 //        JPanel textPanel = new JPanel();
 //        textPanel.setBounds(0, 0, 300, 40);
