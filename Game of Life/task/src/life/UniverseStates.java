@@ -14,7 +14,8 @@ public class UniverseStates {
 
     public void setCurrentState() {
         currentState = new String[pastState.length][pastState.length];
-        GenerateState generator = new GenerateState(pastState);
+        GenerateState generator = new GenerateState();
+        generator.setPastState(pastState);
         currentState = generator.nextState();
     }
 }
