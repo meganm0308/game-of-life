@@ -1,7 +1,6 @@
 package life;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class GenerateState {
 
@@ -11,19 +10,19 @@ public class GenerateState {
         this.pastState = pastState;
     }
 
-    private static String[][] firstState (int matrixSize) {
+    public static String[][] firstState(int matrixSize) {
         String[][] state = new String[matrixSize][matrixSize];
 
         final Random random = new Random();
         for (int i = 0; i < matrixSize; i++) {
             for (int j = 0; j < matrixSize; j++) {
-                state[i][j] = random.nextBoolean()? "O" : " ";
+                state[i][j] = random.nextBoolean() ? "O" : " ";
             }
         }
         return state;
     }
 
-    public String[][] nextState () {
+    public String[][] nextState() {
         String[] neighbors = new String[8];
         String[][] newState = new String[pastState.length][pastState.length];
 
@@ -65,35 +64,5 @@ public class GenerateState {
             }
         }
         return newState;
-    }
-
-
-    public int[] countAlive (int matrixSize) {
-        int generations = 10;
-        int[] aliveNumbers = new int[generations];
-        int counter = 0;
-
-        // 1st generation
-        String[][] state = firstState(matrixSize);
-
-        for (int i = 1; i <= generations; i++) {
-
-            int countAlive = 0;
-            for (int j = 0; j < state.length; j++) {
-                for (int k = 0; k < state.length; k++) {
-                    if (state[j][k].equals("O")) {
-                        countAlive += 1;
-                    }
-                }
-            }
-            aliveNumbers[counter] = countAlive;
-            counter ++;
-
-            // get the next generation
-            UniverseStates states = new UniverseStates(state);
-            states.setCurrentState();
-            state = states.getCurrentState();
-        }
-        return aliveNumbers;
     }
 }
