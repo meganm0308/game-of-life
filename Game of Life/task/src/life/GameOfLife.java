@@ -2,25 +2,50 @@ package life;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameOfLife extends JFrame {
 
     int generation = 10;
     String[][] state;
 
-    JLabel GenerationLabel = new JLabel();
-    JLabel AliveLabel = new JLabel();
+    private JLabel GenerationLabel;
+    private JLabel AliveLabel;
+    private JToggleButton PlayToggleButton;
+    private JButton ResetButton;
 
     public GameOfLife() throws InterruptedException {
         super("Game of Life");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 340);
+        setSize(450, 340);
         setLocationRelativeTo(null);
 
         int matrixSize = 20;
 
         int[] aliveNumbers = new int[generation];
         int counter = 0;
+
+        JPanel buttons = new JPanel();
+        buttons.setBounds(0, 0, 150, 50);
+        buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
+        add(buttons);
+        PlayToggleButton = new JToggleButton("\u279C");
+        PlayToggleButton.setName("PlayToggleButton");
+        PlayToggleButton.setPreferredSize(new Dimension(30, 20));
+
+        PlayToggleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        buttons.add(PlayToggleButton);
+
+        ResetButton = new JButton("\u2B6F");
+        ResetButton.setName("ResetButton");
+        ResetButton.setPreferredSize(new Dimension(30, 20));
+        buttons.add(ResetButton);
 
         // 1st generation
         state = GenerateState.firstState(matrixSize);
@@ -40,15 +65,15 @@ public class GameOfLife extends JFrame {
             //textComponents(i, aliveNumbers[i - 1]);
 
             JPanel textPanel = new JPanel();
-            textPanel.setBounds(0, 0, 300, 40);
+            textPanel.setBounds(0, 75, 150, 350);
             add(textPanel);
 
-            //JLabel GenerationLabel = new JLabel();
+            GenerationLabel = new JLabel();
             GenerationLabel.setName("GenerationLabel");
             GenerationLabel.setText("Generation #" + i);
             textPanel.add(GenerationLabel);
 
-            //JLabel AliveLabel = new JLabel();
+            AliveLabel = new JLabel();
             AliveLabel.setName("AliveLabel");
             AliveLabel.setText("Alive: " + aliveNumbers[i - 1]);
             textPanel.add(AliveLabel);
@@ -86,7 +111,7 @@ public class GameOfLife extends JFrame {
 
     public void field () {
         JPanel field = new rectangles();
-        field.setBounds(0, 40, 300, 300);
+        field.setBounds(150, 0, 300, 300);
         add(field);
     }
 
